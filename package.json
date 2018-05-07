@@ -1,0 +1,25 @@
+{
+  "name": "redux-fetch-thunk",
+  "version": "1.0.0",
+  "description": "A fetch middleWare for redux.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitAntinus/redux-fetch.git"
+  },
+  "keywords": [
+    "redux",
+    "middleware",
+    "fetch",
+    "async"
+  ],
+  "author": "Eric Deng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GitAntinus/redux-fetch/issues"
+  },
+  "homepage": "https://github.com/GitAntinus/redux-fetch#readme"
+}
