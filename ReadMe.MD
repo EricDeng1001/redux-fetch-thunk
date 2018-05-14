@@ -28,7 +28,7 @@ redux-fetch-thunk
 
   定义异步动作
   ```js
-  export const __asyncActionTypeName__ = {
+  export const __asyncActionType__ = {
     name: "name"
   }
   ```
@@ -49,7 +49,7 @@ redux-fetch-thunk
     // 接收参数自定义
     // 返回一个Object
     export const asyncAction = ( arg1, arg2, ..., argN ) => ({
-      type: __asyncActionTypeName__,
+      type: __asyncActionType__,
       handler( pending, resolve, reject ){
         pending( payload, others );
         fetch( request )
@@ -72,7 +72,7 @@ redux-fetch-thunk
 
   ```js
     import {
-      __asyncActionTypeName__ //首先引入刚刚定义的类型
+      __asyncActionType__ //首先引入刚刚定义的类型
     } from "./actionTypes";
 
     export default ( state = defaultState, { type, payload, ...others } ) => {
@@ -80,15 +80,15 @@ redux-fetch-thunk
       switch( type ){
         /*略去其他代码*/
 
-        case __asyncActionTypeName__.pending:
+        case __asyncActionType__.pending:
           // 异步动作正在处理
           break;
-        case __asyncActionTypeName__.resolved:
+        case __asyncActionType__.resolved:
           // payload === resolve的第一个参数json
           // others === resolve的第二个参数
           // 异步动作成功
           break;
-        case __asyncActionTypeName__.rejected:
+        case __asyncActionType__.rejected:
           // 异步动作失败
           break;
       }
