@@ -177,8 +177,6 @@ export const createAuth = ( certification, password ) => ({
   }
 });
 
-
-var p = false;
 export const getAuth = ( certification, password ) => ({
   type: __getAuth__,
   handler( pending, resolve, reject ){
