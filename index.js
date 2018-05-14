@@ -19,7 +19,10 @@ const generateCallback = ( store, type ) => {
 
 export default store => next => action => {
 
-  if( _.isObject( action.type ) && _.isString( action.type.name ) ){
+  if( _.isObject( action.type )
+   && _.isString( action.type.name )
+   && _.isFunction( action.handler )
+  ){
     if( action.type.pending === undefined ){
       action.type.pending = Symbol( action.type.name + "-pending" );
       action.type.resolved = Symbol( action.type.name + "-resolved" );
