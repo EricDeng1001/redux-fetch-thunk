@@ -1,25 +1,35 @@
 import _ from "lodash";
 
-const generateCallback = ( store, type ) => ( payload, anything ) => {
-  store.dispatch({
-    type,
-    payload,
-    ...anything
-  });
+const callbackTable = {};
+
+const generateCallback = ( store, type ) => {
+  //假定用户不会替换store，提高性能
+  var callback = callbackTable[type];
+  if( callback ){
+    return callback;
+  }
+  return callbackTable[type] = ( payload, anything ) => {
+    store.dispatch({
+      type,
+      payload,
+      ...anything
+    });
+  }
 }
 
 export default store => next => action => {
+
   if( _.isObject( action.type ) && _.isString( action.type.name ) ){
     if( action.type.pending === undefined ){
-      action.type.pending = Symbol( action.name + "-pending" );
-      action.type.resolved = Symbol( action.name + "-resolved" );
-      action.type.rejected = Symbol( action.name + "-rejected" );
+      action.type.pending = Symbol( action.type.name + "-pending" );
+      action.type.resolved = Symbol( action.type.name + "-resolved" );
+      action.type.rejected = Symbol( action.type.name + "-rejected" );
     }
 
     action.handler(
       generateCallback( store, action.type.pending ),
-      generateCallback( store, action.type.resolve ),
-      generateCallback( store, action.type.reject )
+      generateCallback( store, action.type.resolved ),
+      generateCallback( store, action.type.rejected )
     );
 
   } else {
